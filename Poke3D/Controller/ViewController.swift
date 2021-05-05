@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
 //        let configuration = ARImageTrackingConfiguration()    // for one image
         let configuration = ARWorldTrackingConfiguration()      // for several images
         
-        if let imageToTrack = ARReferenceImage.referenceImages(inGroupNamed: "Pokemon Cards", bundle: Bundle.main) {
+        if let imageToTrack = ARReferenceImage.referenceImages(inGroupNamed: Constants.assetsGroupName, bundle: Bundle.main) {
 //            configuration.trackingImages = imageToTrack       // for one image
             configuration.detectionImages = imageToTrack        // for several images
             configuration.maximumNumberOfTrackedImages = 2

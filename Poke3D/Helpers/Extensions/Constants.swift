@@ -8,6 +8,7 @@
 import Foundation
 
 struct Constants {
+    static let assetsGroupName = "Pokemon Cards"
     static private let eevee = Pokemon.Names.eevee
     static private let oddish = Pokemon.Names.oddish
     static let eeveeCard = "\(eevee)-card"
