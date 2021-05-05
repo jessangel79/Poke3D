@@ -15,11 +15,6 @@ final class ViewController: UIViewController {
     
     @IBOutlet private var sceneView: ARSCNView!
     
-    // MARK: - Properties
-    
-//    private var pokeArray = [SCNNode]()
-//    private var pokeScenes = [SCNScene]()
-    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -62,29 +57,11 @@ final class ViewController: UIViewController {
     // MARK: - Methods
     
     private func addPoke(name: String, planeNode: SCNNode) {
-        let pokemons: [String: String] = [
-            "eevee-card": "art.scnassets/eevee.scn",
-            "oddish-card": "art.scnassets/oddish.scn"
-        ]
-        let pokeOrientations: [String: Float] = [
-            "eevee-card": .pi / 2,
-            "oddish-card": .pi
-        ]
+        let pokemons: [String: Pokemon] = [Constants.eeveeCard: Pokemon(scene: Constants.eeveeScn, orientation: .pi/2), Constants.oddishCard: Pokemon(scene: Constants.oddishScn, orientation: .pi)]
         
-        // TODO: - Struct pour paramètres des pokemons
-        //        let eevee = (name: "eevee-card", scene: "art.scnassets/eevee.scn", orientation: Float.pi/2)
-        // faire une structure avec 2 paramètres
-        //
-        
-//        let pokemons: [String: [String: Float]] = [
-//            "eevee-card": ["art.scnassets/eevee.scn": .pi / 2],
-//            "oddish-card": ["art.scnassets/oddish.scn": .pi]
-//        ]
-        
-//        guard let scene = pokemons[name] else { return }
-//        guard let orientation = scene[value(forKey: scene)] else { return }
-        guard let scene = pokemons[name] else { return }
-        guard let orientation = pokeOrientations[name] else { return }
+        guard let pokemon = pokemons[name] else { return }
+        let scene = pokemon.scene
+        let orientation = pokemon.orientation
         guard let pokeScene = SCNScene(named: scene) else { return }
         guard let pokeNode = pokeScene.rootNode.childNodes.first else { return }
         pokeNode.eulerAngles.x = orientation
