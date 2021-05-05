@@ -57,6 +57,7 @@ final class ViewController: UIViewController {
     // MARK: - Methods
     
     private func addPoke(name: String, planeNode: SCNNode) {
+        // .pi/2 = 90° - .pi = 180° - Pokemons.playground
         let pokemons: [String: Pokemon] = [Constants.eeveeCard: Pokemon(scene: Constants.eeveeScn, orientation: .pi/2), Constants.oddishCard: Pokemon(scene: Constants.oddishScn, orientation: .pi)]
         
         guard let pokemon = pokemons[name] else { return }
