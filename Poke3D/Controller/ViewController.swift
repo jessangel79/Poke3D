@@ -35,13 +35,7 @@ final class ViewController: UIViewController {
         // Create a session configuration
 //        let configuration = ARImageTrackingConfiguration()    // for one image
         let configuration = ARWorldTrackingConfiguration()      // for several images
-        
-        if let imageToTrack = ARReferenceImage.referenceImages(inGroupNamed: Constants.assetsGroupName, bundle: Bundle.main) {
-//            configuration.trackingImages = imageToTrack       // for one image
-            configuration.detectionImages = imageToTrack        // for several images
-            configuration.maximumNumberOfTrackedImages = 2
-            print("Images Successfully Added")
-        }
+        setImagesToTrack(with: configuration)
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -55,6 +49,15 @@ final class ViewController: UIViewController {
     }
     
     // MARK: - Methods
+    
+    private func setImagesToTrack(with configuration: ARWorldTrackingConfiguration) {
+        if let imageToTrack = ARReferenceImage.referenceImages(inGroupNamed: Constants.assetsGroupName, bundle: Bundle.main) {
+//            configuration.trackingImages = imageToTrack       // for one image
+            configuration.detectionImages = imageToTrack        // for several images
+            configuration.maximumNumberOfTrackedImages = 2
+//            print("Images Successfully Added")
+        }
+    }
     
     private func addPoke(name: String, planeNode: SCNNode) {
         // .pi/2 = 90° - .pi = 180° - Pokemons.playground
@@ -77,7 +80,7 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
         guard let imageAnchor = anchor as? ARImageAnchor else { return nil }
-        print(imageAnchor.referenceImage.name as Any)
+//        print(imageAnchor.referenceImage.name as Any)
         let plane = SCNPlane(width: imageAnchor.referenceImage.physicalSize.width, height: imageAnchor.referenceImage.physicalSize.height)
         plane.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
         let planeNode = SCNNode(geometry: plane)
